@@ -51,4 +51,84 @@ DIGIT_LETTERS = {
 		for subMnemonic in mnemonicSoFar:
 			mnemonics.append(subMnemonic + [letter])
 ```
-  -   
+
+- Getting mnemonics in string form: after all the recursive call is done (if idx == len(phoneNumber) - 1) then join hte list and return the list of string of mnemonics
+```python
+def phoneNumberMnemonics(phoneNumber, idx = None):
+    if idx == None:
+		idx = len(phoneNumber) - 1
+	if idx < 0:
+		return [[]]
+	mnemonicSoFar = phoneNumberMnemonics(phoneNumber, idx-1 )
+	
+	letters = DIGIT_LETTERS[phoneNumber[idx]]
+	mnemonics = []
+	
+	for letter in letters:
+		for subMnemonic in mnemonicSoFar:
+			
+			mnemonics.append(subMnemonic + [letter])
+			
+	if idx == len(phoneNumber) - 1:
+		result = []
+		for mnemonic in mnemonics:
+			result.append("".join(mnemonic))
+		return result
+    return mnemonics
+
+DIGIT_LETTERS = {
+ "0": ["0"],
+ "1": ["1"],
+ "2": ["a", "b", "c"],
+ "3": ["d", "e", "f"],
+ "4": ["g", "h", "i"],
+ "5": ["j", "k", "l"],
+ "6": ["m", "n", "o"],
+ "7": ["p", "q", "r", "s"],
+ "8": ["t", "u", "v"],
+ "9": ["w", "x", "y", "z"],
+}
+```
+
+## Recurrsion 2
+
+- use a helper function with idx, phoneNumber, currentMnemonic, and mnemonicsFound (empty list) as inputs
+- **currentMnemonic** is a list of '0's of length of phone number to use as place holder 
+- for 999, the initial current list will be ['0' , '0', '0']
+- on the first iteration, it will place "w" , "x", "y", "Z" in the 0th position (using for loop) and call the helper function on the next positon
+- on the next iteration, helper function will place "w" , "x", "y", "Z" in the 1st position (using for loop) and call itself for the next position. It will go on.
+- In the helper function, if it reaches the end of the phoneNumber length then it will join items of the list and store the string is **mnemonicsFound** list
+```python
+def phoneNumberMnemonics(phoneNumber):
+    currentMnemonic = ['0'] * len(phoneNumber)
+	mnemonicsFound = []
+	helper(0, phoneNumber, currentMnemonic, mnemonicsFound)
+    return mnemonicsFound
+
+def helper(idx, phoneNumber, currentMnemonic, mnemonicsFound):
+	if idx == len(phoneNumber):
+		mnemonic = "".join(currentMnemonic)
+		mnemonicsFound.append(mnemonic)
+	else:
+		digit = phoneNumber[idx]
+		letters = DIGIT_LETTERS[digit]
+		
+		for letter in letters:
+			currentMnemonic[idx] = letter
+			helper(idx+1, phoneNumber, currentMnemonic, mnemonicsFound)
+		
+		
+		
+DIGIT_LETTERS = {
+ "0": ["0"],
+ "1": ["1"],
+ "2": ["a", "b", "c"],
+ "3": ["d", "e", "f"],
+ "4": ["g", "h", "i"],
+ "5": ["j", "k", "l"],
+ "6": ["m", "n", "o"],
+ "7": ["p", "q", "r", "s"],
+ "8": ["t", "u", "v"],
+ "9": ["w", "x", "y", "z"],
+}
+```
