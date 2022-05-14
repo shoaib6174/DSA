@@ -9,4 +9,4 @@ This repo is being used to keep track of DSA problems I am solving.
 
 ## Searching
 - Medium
-  1.  [Search In Sorted Matrix]()
+  1.  [Search In Sorted Matrix](https://github.com/shoaib6174/DSA/blob/main/Search%20in%20Sorted%20Matrix.md)
