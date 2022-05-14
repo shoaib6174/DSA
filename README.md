@@ -10,3 +10,8 @@ This repo is being used to keep track of DSA problems I am solving.
 ## Searching
 - Medium
   1.  [Search In Sorted Matrix](https://github.com/shoaib6174/DSA/blob/main/Search%20in%20Sorted%20Matrix.md)
+
+
+## Sorting
+- Medium
+  1. [Three Number Sort](https://github.com/shoaib6174/DSA/blob/main/Three%20Number%20Sort.md)
