@@ -15,3 +15,7 @@ This repo is being used to keep track of DSA problems I am solving.
 ## Sorting
 - Medium
   1. [Three Number Sort](https://github.com/shoaib6174/DSA/blob/main/Three%20Number%20Sort.md)
+
+## Stack
+- Medium
+  1. [Min Max Stack](https://github.com/shoaib6174/DSA/blob/main/Mib%20Max%20Stack.md)
