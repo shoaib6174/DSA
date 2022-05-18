@@ -18,4 +18,4 @@ This repo is being used to keep track of DSA problems I am solving.
 
 ## Stack
 - Medium
-  1. [Min Max Stack](https://github.com/shoaib6174/DSA/blob/main/Mib%20Max%20Stack.md)
+  1. [Min Max Stack](https://github.com/shoaib6174/DSA/blob/main/Min%20Max%20Stack.md)
