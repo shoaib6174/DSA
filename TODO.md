@@ -2,7 +2,8 @@
 
 ## Topics
 
-
+75 question from leetcode
+https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions
 
 Arrays & Strings
   - Basic Array And Strings Questions
