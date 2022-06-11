@@ -33,6 +33,8 @@ def isPalindrome(string):
 3. if charCode > ord(z) then newChar = chr(ord(a) - 1 + charCode % ord(z))
 4. use list to store
 
+
+
 ```python
 def caesarCipherEncryptor(string, key):
     # only lowercase letter
@@ -128,4 +130,22 @@ def counter(string):
         freq[letter] = freq[letter] + 1 if letter in freq else 1
         
     return freq
+```
+
+
+## First non-repeating character
+- make a frequency dictionary from the characters of the string 
+- iterate the string and return the first positon for which the frequency is 1
+
+```python
+def firstNonRepeatingCharacter(string):
+    # O(n) | O(1) because the string only contains lowercase charecters
+	freq = {}
+	
+	for c in string:
+		freq[c] = freq[c] + 1 if c in freq else 1
+	for i in range(len(string)):
+		if freq[string[i]] == 1:
+			return i
+    return -1
 ```
