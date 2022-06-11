@@ -2,6 +2,8 @@ This repo is being used to keep track of DSA problems I am solving.
 
 ## TODO List
 
+https://github.com/shoaib6174/DSA/blob/main/TODO.md
+
 ## Recursion
 - Medium
   1. [Permutations](https://github.com/shoaib6174/DSA/blob/main/Permutations.md)
