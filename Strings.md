@@ -99,3 +99,33 @@ def runLengthEncoding(string):
     return "".join(result)
             
 ```
+
+## Generate Document
+
+- count frequency of the letters of characters string and store it in a dictionary
+- for each letter in document 
+	- if the letter is not in frequency dict or freqency is 0 then return Flse
+	- ohterwise decreace frequency count of characters string by 1 
+- return True
+
+```python
+def generateDocument(characters, document):
+    # O(m+n) | O(c)
+    charFreq = counter(characters)
+
+    for k in document:
+        if k not in charFreq or charFreq[k] == 0:
+            return False
+        charFreq[k] -= 1
+    
+    return True
+
+
+def counter(string):
+    freq = {}
+    
+    for letter in string:
+        freq[letter] = freq[letter] + 1 if letter in freq else 1
+        
+    return freq
+```
