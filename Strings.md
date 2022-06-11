@@ -71,3 +71,31 @@ def caesarCipherEncryptor(string, key):
 
 
 ```
+
+## Run-length encoding
+
+- use counter and increase count if current mathes with previous
+- if counter exceeds 9 or leters doesn't match then apeend counter and letter to a list
+- when the for ends, entry the current current and letter to the list
+
+```python
+def runLengthEncoding(string):
+    # O(n) | O(n)
+    result = []
+    counter = 1
+    previous = string[0]
+
+    for letter in string[1:]:
+        if letter == previous and counter < 9:
+            counter += 1
+        else:
+            result.append(str(counter))
+            result.append(previous)
+
+            previous = letter
+            counter = 1
+            
+    result.append(f"{counter}{previous}")
+    return "".join(result)
+            
+```
