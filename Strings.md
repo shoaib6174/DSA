@@ -149,3 +149,5 @@ def firstNonRepeatingCharacter(string):
 			return i
     return -1
 ```
+
+## Longest Palindromic Substring
