@@ -1,6 +1,7 @@
 # Strings
 
-## Palindrome checkor
+## Palindrome checker
+https://leetcode.com/problems/valid-palindrome/
 
 #### Algorithm: 
 1. Declare left and right pointer
@@ -25,6 +26,8 @@ def isPalindrome(string):
 	return True
 ```
 ## Caesar Cipher Encryptor
+https://www.hackerrank.com/challenges/caesar-cipher-1/problem
+
 
 #### Algorithm 1:
 
@@ -52,6 +55,7 @@ def caesarCipherEncryptor(string, key):
 
 #### Algorithm 2:
 
+Store all the possible values in a list. For each character add the key with the index of the character then modulus is length of list.
 1. alphabets = sorted list of all characters
 2. key = key % 26
 3. charCode = alphabets.index(letter) + key
@@ -75,6 +79,8 @@ def caesarCipherEncryptor(string, key):
 ```
 
 ## Run-length encoding
+
+https://leetcode.com/problems/string-compression/
 
 - use counter and increase count if current mathes with previous
 - if counter exceeds 9 or leters doesn't match then apeend counter and letter to a list
@@ -104,6 +110,13 @@ def runLengthEncoding(string):
 
 ## Generate Document
 
+You're given a string of available characters and a string representing a document that you need to
+generate. Write a function that determines if you can generate the document using the available
+characters. If you can generate the document, your function should return true ; otherwise, it should
+return false .
+
+https://leetcode.com/problems/ransom-note/
+
 - count frequency of the letters of characters string and store it in a dictionary
 - for each letter in document 
 	- if the letter is not in frequency dict or freqency is 0 then return Flse
@@ -128,12 +141,17 @@ def counter(string):
     
     for letter in string:
         freq[letter] = freq[letter] + 1 if letter in freq else 1
+	
+	# freq[letter] = freq.get(letter, 0) + 1
+    # freq = collections.Counter(s)
         
     return freq
 ```
 
 
 ## First non-repeating character
+
+https://leetcode.com/problems/first-unique-character-in-a-string/
 - make a frequency dictionary from the characters of the string 
 - iterate the string and return the first positon for which the frequency is 1
 
