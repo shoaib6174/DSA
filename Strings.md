@@ -201,3 +201,33 @@ def palindromeLength(s):
         
     return len(s)
  ```
+
+#### Approach 2:
+
+- consider each element from index 1 of the string as center of palindrome
+	- find the length of palindrome for even length paliondrome and odd length palindrome centering this element
+	- compare the maximum of these lengthd to the current maximum
+	- don't forget to store the start and end position
+
+```python
+def longestPalindromicSubstring(string):
+    # O(n^2) | O(n)
+    pos = [0,1]
+    for i in range(1, len(string)):
+            oddLenPalinPos = palindromePosition(string, i-1, i+1)
+            evenLenPalinPos = palindromePosition(string, i-1, i)
+            
+            maxLen = max(oddLenPalinPos, evenLenPalinPos, key = lambda x: x[1] - x[0])
+            pos = max(maxLen, pos, key= lambda x: x[1] -x[0])
+            
+    return string[pos[0]:pos[1]]
+            
+def palindromePosition(string, left, right):
+    while left >= 0 and right < len(string):
+        if string[left] != string[right]:
+            break    
+        left-=1
+        right += 1
+        
+    return [left+1, right]
+```
