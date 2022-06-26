@@ -170,3 +170,34 @@ def firstNonRepeatingCharacter(string):
 ```
 
 ## Longest Palindromic Substring
+https://leetcode.com/problems/longest-palindromic-substring/
+
+#### Approach 1:
+- Generate all the substring
+- if panlindromic then take length and compare with current maximum
+
+
+```python
+def longestPalindromicSubstring(string):
+    #O(n^3) ! O(n)
+    longest = string[0]
+    
+    for i in range(len(string) -1):
+        for j in range(len(string) , i+1, -1):
+            subString = string[i:j]
+            longest = subString if palindromeLength(subString) > len(longest) else longest
+    return longest
+
+    
+def palindromeLength(s):
+    left = 0
+    right = len(s) - 1
+
+    while left < right:
+        if s[left] != s[right]:
+            return 0
+        left += 1
+        right -= 1
+        
+    return len(s)
+ ```
