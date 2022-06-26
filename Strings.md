@@ -110,12 +110,13 @@ def runLengthEncoding(string):
 
 ## Generate Document
 
+https://leetcode.com/problems/ransom-note/
+
 You're given a string of available characters and a string representing a document that you need to
 generate. Write a function that determines if you can generate the document using the available
 characters. If you can generate the document, your function should return true ; otherwise, it should
 return false .
 
-https://leetcode.com/problems/ransom-note/
 
 - count frequency of the letters of characters string and store it in a dictionary
 - for each letter in document 
