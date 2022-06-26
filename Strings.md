@@ -231,3 +231,27 @@ def palindromePosition(string, left, right):
         
     return [left+1, right]
 ```
+
+## Group Anagrams
+https://leetcode.com/problems/group-anagrams/
+
+#### Approach:
+
+- declare a dictionary to store the anagrams
+- use sorted word as key of the dict as anagram will have same sorted string. like- sorted form of "dcba"  and "cdba" both is "abcd"
+- iterate through the words and add them to the list associated to the sorted word
+
+```python
+def groupAnagrams(words):
+    # O( numOfWords * sizeOfLongestWord * log(sizeOfLongestWord)) | O(numOfWords * sizeOfLongestWord)
+    anagrams = {}
+
+    for word in words:
+        sortedWord = "".join(sorted(word))
+        if sortedWord not in anagrams:
+            anagrams[sortedWord] = []
+            
+        anagrams[sortedWord].append(word)
+    
+    return list(anagrams.values())
+```
