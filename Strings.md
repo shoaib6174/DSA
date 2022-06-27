@@ -259,4 +259,41 @@ def groupAnagrams(words):
 ## Restore IP Addrresses
 https://leetcode.com/problems/restore-ip-addresses/
 
+#### Approach
+- use a function to verify if a subString/integer is valid
+- Use 3 for loops to iterate over the string 
+- Use declared list ["" , "", "", ''] instead of appedning  
+- Run the for loop for minimum of next 3 character and  length of string so avoid empty string
 
+``` python
+def validIPAddresses(string):
+    # O(1) | O(1) becasue max length of string is fixed
+    ips = []
+    for i in range(1, min(4, len(string))) : 
+        currIP = ["" , "", "", '']
+        currIP[0] = string[:i]
+        if not isValid(currIP[0]):
+            continue
+        
+        for j in range(i+1, i + min(4, len(string)-i) ):
+            currIP[1] = string[i:j]
+            if not isValid(currIP[1]):
+                continue
+
+            for k in range(j+1, j + min(4, len(string)- j) ):
+                currIP[2] = string[j:k]
+                currIP[3] = string[k:]
+
+                if isValid(currIP[2]) and isValid(currIP[3]):
+                    ips.append(".".join(currIP))
+                
+    return ips
+
+def isValid(subString):
+    ssInt = int(subString)
+    if len(subString) == 0 or int(subString) > 255 :
+        return False
+    if len(subString) > 1 and subString[0] == "0":
+        return False
+    return True
+```
