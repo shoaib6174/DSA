@@ -297,3 +297,52 @@ def isValid(subString):
         return False
     return True
 ```
+
+
+## Reverse Words in a String
+https://leetcode.com/problems/reverse-words-in-a-string/
+
+## Approach 1
+- use loop to find whitespace and add the previous word  to list using sliding window
+- if white space then 
+	- add the word between slow and fast in the ans list	 
+	- reset both pointer
+	- add it to the ans list
+- if not whitespace increase the fast pointer
+- use while loop till fast is less then 0
+- at the end of the while loop add the word between slow and fast in the ans list	
+
+```python
+def reverseWordsInString(string):
+    # O(n) | O(n)
+    ans = []
+    slow = len(string)
+    fast = slow - 1
+
+    while fast >= 0:
+        if string[fast] == " ":
+            ans.append(string[fast+1:slow] + " " )
+            slow  = fast
+        fast -= 1
+
+    ans.append(string[fast+1:slow])
+
+    return "".join(ans)
+```
+
+##### Another code
+
+```python
+def reverseWordsInString(string):
+    # O(n) | O(n)
+    endOfTheWord = len(string)
+    words = []
+    for i in range(len(string)-1, -1, -1):
+        if string[i] == " ":
+            words.append(string[i+1:endOfTheWord])
+            endOfTheWord = i
+            
+    words.append(string[:endOfTheWord])
+
+    return " ".join(words)
+```
