@@ -302,7 +302,7 @@ def isValid(subString):
 ## Reverse Words in a String
 https://leetcode.com/problems/reverse-words-in-a-string/
 
-## Approach 1
+#### Approach 1
 - use loop to find whitespace and add the previous word  to list using sliding window
 - if white space then 
 	- add the word between slow and fast in the ans list	 
@@ -345,4 +345,60 @@ def reverseWordsInString(string):
     words.append(string[:endOfTheWord])
 
     return " ".join(words)
+```
+## Minimum Characters for words
+
+Write a function that takes in an array of words and returns the smallest array of characters needed to
+form all of the words. The characters don't need to be in any particular order.
+For example, the characters ["y", "r", "o", "u"] are needed to form the words
+["your", "you", "or", "yo"] .
+Note: the input words won't contain any spaces; however, they might contain punctuation and/or special
+characters.
+``` Python
+Input_Words = ["this", "that", "did", "deed", "them!", "a"]
+
+Output = ["t", "t", "h", "i", "s", "a", "d", "d", "e", "e", "m", "!"]
+```
+
+#### Approach
+- dictionary for storing character frequency
+- count the frequency for each word
+- update the character frequency
+- make a list from the character frequency dictionary
+
+```python
+def minimumCharactersForWords(words):
+    # w = num of words, l = max length of word, c = numbero of unique characters
+    # time:  O(wl + c). but c < wl. so O(wl)
+    # space: O(c)
+    characters = {}
+    for word in words:
+        wordFreq = countCharacters(word)
+        updateMaxFreqOfCharacters(wordFreq, characters)
+    
+    ans = []
+    for c , value in characters.items():
+        for _ in range(value):
+            ans.append(c)
+
+    return ans
+    
+def countCharacters(s):
+    freq = {}
+    for c in s:
+        if c not in freq:
+            freq[c] = 0
+        freq[c] += 1
+
+    return freq
+
+def updateMaxFreqOfCharacters(wordFreq, characterFreq):
+    for c in wordFreq:
+        freq = wordFreq[c]
+        if c in characterFreq:
+            characterFreq[c] = max(freq, characterFreq[c])
+        else:
+            characterFreq[c] = freq
+    return characterFreq
+
 ```
