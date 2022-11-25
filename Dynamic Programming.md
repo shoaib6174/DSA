@@ -43,6 +43,10 @@ def maxSubsetSumNoAdjacent(array):
 
 ```
 
+* Track maxmimum possilbe value including the value of current position using prev and two_prev
+* Return the max of prev and two_prev
+
+
 ```python
 
 # O(n) | O(1)
@@ -76,3 +80,48 @@ def maxSubsetSumNoAdjacent(array):
 	return max(prev, two_prev)
 
 ```
+
+
+### Number of ways to make change
+
+Solution: for each coin, for each ammount add how many ways to make [ammount - coin]
+
+``` python
+# O(nd) | O(n)
+# for each coin: for (coin to n) ammount:  ways[ammount] = ways[ammount - coin]
+# start with ways[0] = 1
+
+def numberOfWaysToMakeChange(n, denoms):
+    ways = [0] * (n+1)
+	ways[0] = 1
+	for denom in denoms:
+		for ammount in range(1, n+1):
+			if denom <= ammount:
+				ways[ammount] += ways[ammount - denom]
+				
+	return ways[n]
+
+```
+
+### Min number of coins to make changes
+
+
+Solution: for each coin, for each ammount, minCoins is current one or "minCoins(ammoun-coin) plus 1" 
+
+```python
+# For each coin, For each ammount, #minCoins[ammount] = min( minCoins[ammount- coin] + 1 , minCoins[ammount])
+# initialize minCoins at float("inf")
+# O(nd) | O(n)
+def minNumberOfCoinsForChange(n, denoms):
+    minCoins = [float("inf")] * (n+1)
+    minCoins[0] = 0
+    
+    for denom in denoms:
+        for ammount in range(denom, n+1):
+            minCoins[ammount] = min(minCoins[ammount - denom] + 1, minCoins[ammount])
+    
+    return minCoins[-1] if minCoins[-1] <= n else -1
+
+```
+
+
