@@ -2,7 +2,7 @@
 
 List by Love Babbar: https://whimsical.com/dp-sheet-by-love-babbar-EELKgSMWg51ypLyfn9mTjr
 
-### Max Subset sum no adjacent
+## 1. Max Subset sum no adjacent
 
 Given an array arr[] of positive numbers, The task is to find the maximum sum of a subsequence such that no 2 numbers in the sequence should be adjacent in the array.
 
@@ -82,7 +82,7 @@ def maxSubsetSumNoAdjacent(array):
 ```
 
 
-### Number of ways to make change
+## 2. Number of ways to make change
 
 Solution: for each coin, for each ammount add how many ways to make [ammount - coin]
 
@@ -103,7 +103,7 @@ def numberOfWaysToMakeChange(n, denoms):
 
 ```
 
-### Min number of coins to make changes
+## 3. Min number of coins to make changes
 
 
 Solution: for each coin, for each ammount, minCoins is current one or "minCoins(ammoun-coin) plus 1" 
