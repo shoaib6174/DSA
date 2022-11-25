@@ -124,4 +124,46 @@ def minNumberOfCoinsForChange(n, denoms):
 
 ```
 
+## 4. Levenshtein Distance
+
+Problem: Min operations (add, remove, substitute) on string1 to get string2
+
+![image](https://user-images.githubusercontent.com/40586752/203989017-f9d0b47d-58c7-412a-886c-4d8920f6e572.png)
+
+![image](https://user-images.githubusercontent.com/40586752/203989316-e1c3dd1d-16a4-4120-82a2-8ba9f9b4b79b.png)
+
+Sol: 
+* create 2d matrix including empty cell and fill first col and row
+* if str1[i] and str2[j] matches then value of prev cell in row (distance[i-1][j-1]) 
+* else: min of sorrounding 3 cells + 1
+
+```python
+# 2D array 
+# target string's character in col
+# given string in row
+# if str1[r] == str2[r] : E[r][c] = E[r-1][c-1] ## prev in row
+# else: E[r][c] = 1 + min of sorrudings 3 cells
+def levenshteinDistance(str1, str2):
+    edits = [[0 for _ in range(len(str2)+1)] for _ in range(len(str1) +1)]
+
+    # first row 1 to len(str2)
+    for i in range(len(str2)+1):
+        edits[0][i] = i
+    # first col 1 to len(str1)
+    for i in range(len(str1)+1):
+        edits[i][0]  = i
+
+    for i in range(1,len(str1) + 1):
+        for j in range(1,len(str2) +1):
+            if str1[i - 1] == str2[j - 1]:
+                edits[i][j] = edits[i-1][j-1]
+            else:
+                edits[i][j] = 1 + min(edits[i-1][j-1], edits[i-1][j], edits[i][j-1])
+    
+            
+    # print(edits)
+    return edits[-1][-1]
+
+```
+
 
