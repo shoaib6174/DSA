@@ -138,6 +138,7 @@ Sol:
 * else: min of sorrounding 3 cells + 1
 
 ```python
+# O(mn) | O(mn)
 # 2D array 
 # target string's character in col
 # given string in row
@@ -209,3 +210,33 @@ def maxSumIncreasingSubsequence(array):
 
 ```
 
+## 6. Longest common subsequence
+Solution:
+```
+    for each pair of substrings
+        if final characters match:
+            remove them from both strings and prepend them to the LCS 
+        else:
+            find the longest subsequence by removing one or the othter character
+```
+1. 2D array creates a pair of all possible substrings
+2. first row and first col represents empty string
+3. for each cell if chars match: then add char to the longest subsequence excluding them ([i-1][j-1])
+4. else take the longest excluding one of them ( [i-1][j] or [i][j-1]
+
+``` python
+# O(mn * min(m,n)) | O(mn * min(m,n))
+def longestCommonSubsequence(str1, str2):
+    matches = [[[] for _ in range(len(str2)+1)] for _ in range(len(str1)+1) ] #col str1
+
+    for i in range(1,len(str1)+1):
+        for j in range(1,len(str2)+1):
+            if str1[i-1] == str2[j-1]:
+                matches[i][j] = matches[i-1][j-1] + str2[j-1] # [*matches[i-1][j-1] , str2[j-1]]
+            else:
+                matches[i][j] = matches[i-1][j] if len(matches[i-1][j]) >= len(matches[i][j-1]) else matches[i][j-1]
+
+
+    return matches[-1][-1]
+
+```
