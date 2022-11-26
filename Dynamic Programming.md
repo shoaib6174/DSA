@@ -235,7 +235,8 @@ def longestCommonSubsequence(str1, str2):
             if str1[i-1] == str2[j-1]:
                 matches[i][j] = matches[i-1][j-1] + str2[j-1] # [*matches[i-1][j-1] , str2[j-1]]
             else:
-                matches[i][j] = matches[i-1][j] if len(matches[i-1][j]) >= len(matches[i][j-1]) else matches[i][j-1]
+                #matches[i][j] = matches[i-1][j] if len(matches[i-1][j]) >= len(matches[i][j-1]) else matches[i][j-1]
+		matches[i][j] = max( matches[i][j-1], matches[i-1][j], key=len)
 
 
     return matches[-1][-1]
