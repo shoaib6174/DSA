@@ -166,4 +166,46 @@ def levenshteinDistance(str1, str2):
 
 ```
 
+## 5. Max Sum increasing subsequence
+
+Problem: Return max sum and subsequnce
+
+Solution:
+1. copy the array (sums)
+2. at each index of sums, store the max sum that can be generated using a increasing subsequence ending at that index's sum
+3. In another list initialized with None, at each index, store the positon of prev element of the subSeq which gave the max 
+4. Build the seq using idx of maxSum
+
+```python
+# O(n^2) | O(n)
+def maxSumIncreasingSubsequence(array):
+    sums = array[:]
+    prevPosition = [None for _ in range(len(array))]
+    maxSumIdx = 0
+
+    for i in range(len(array)):
+        currNum = array[i]
+        for prev in range(i):
+            otherNum = array[prev]
+            if otherNum < currNum:
+                if sums[prev] + currNum > sums[i]:
+                    sums[i] = sums[prev] + currNum
+                    prevPosition[i] = prev
+        if sums[i] > sums[maxSumIdx]:
+            maxSumIdx = i
+
+    # max sum of sub sequence
+    maxSum = sums[maxSumIdx]
+
+    # building the sequence
+    seq = []
+    while maxSumIdx is not None:
+        seq.append(array[maxSumIdx])
+        maxSumIdx = prevPosition[maxSumIdx]
+        
+    seq = list(reversed(seq))
+
+    return [maxSum, seq]
+
+```
 
