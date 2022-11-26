@@ -223,6 +223,7 @@ Solution:
 2. first row and first col represents empty string
 3. for each cell if chars match: then add char to the longest subsequence excluding them ([i-1][j-1])
 4. else take the longest excluding one of them ( [i-1][j] or [i][j-1]
+![image](https://user-images.githubusercontent.com/40586752/204074689-8ce6eb0d-8e13-42d0-a95b-a10633650c0c.png)
 
 ``` python
 # O(mn * min(m,n)) | O(mn * min(m,n))
