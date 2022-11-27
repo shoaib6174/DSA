@@ -142,7 +142,7 @@ Sol:
 # 2D array 
 # target string's character in col
 # given string in row
-# if str1[r] == str2[r] : E[r][c] = E[r-1][c-1] ## prev in row
+# if str1[r] == str2[r] : E[r][c] = E[r-1][c-1] ## diagonally prev / prev row & prev col
 # else: E[r][c] = 1 + min of sorrudings 3 cells
 def levenshteinDistance(str1, str2):
     edits = [[0 for _ in range(len(str2)+1)] for _ in range(len(str1) +1)]
@@ -167,6 +167,111 @@ def levenshteinDistance(str1, str2):
 
 ```
 
+##### Space optimization O(min(m,n))
+Sol: two list of min(m,n) length to store two rows
+
+```python
+# space optimized
+# O(mn) | O(min(m,n))
+def levenshteinDistance(str1, str2):
+    small = str1 if len(str1) < len(str2) else str2
+    big   = str1 if len(str1) >= len(str2) else str2
+
+    evenEdits = [x for x in range(len(small) + 1)]  #top row
+    oddEdits = [None for x in range(len(small) + 1)] # bottom row
+
+    for i in range(1, len(big) + 1):
+        #alternating rows
+        if i % 2 == 1:             
+            currEdits , prevEdits = oddEdits, evenEdits
+        else:
+            currEdits , prevEdits = evenEdits, oddEdits
+
+        #  setting col value [0,1,2,3.....]
+        currEdits[0] = i
+        
+        for j in range(1,len(small) + 1):
+            if big[i - 1] == small[j - 1]:
+                currEdits[j] = prevEdits[j - 1] 
+            else:
+                currEdits[j] = 1 + min(currEdits[j - 1], prevEdits[j], prevEdits[j-1]) 
+
+    return evenEdits[-1] if len(big) % 2 == 0 else oddEdits[-1]  #currEdits don't work with empty string
+
+```
+## 6. Number of ways to traverse graph
+
+* Brute Force: add 1 when reaches destination
+```python
+def numberOfWaysToTraverseGraph(width, height):
+    # brute force recursion
+    # O(2^(m+n)) | O(m + n)
+	if width == 1 and height == 1 : return 1 
+	if width == 0 or height == 0 : return 0 
+	
+    return numberOfWaysToTraverseGraph(width-1, height) + numberOfWaysToTraverseGraph(width, height-1)
+
+```
+* Memomization 
+def numberOfWaysToTraverseGraph(width, height):
+	def traverse_graph(width, height, memo = {} ):
+		token = f"{width},{height}"
+		if token in memo: return memo[token]
+	
+		if width == 1 and height == 1 : return 1 
+		if width == 0 or height == 0 : return 0 
+		
+		memo[token] = traverse_graph(width-1, height, memo) + traverse_graph(width, height-1, memo)
+		return memo[token]
+	
+	return traverse_graph(width, height)
+```
+
+* 2D array
+
+``` python
+# O(m * n) | O(m * n)
+# add the num of ways to reach left and up
+# first row and col is 1 as couting num of ways
+def numberOfWaysToTraverseGraph(width, height):
+    steps = [[0 for _ in range(width)] for _ in range(height)]
+
+    for i in range(width):
+        steps[0][i] = 1
+    for j in range(height):
+        steps[j][0] = 1
+
+    for i in range(1,height):
+        for j in range(1,width):
+            steps[i][j] = steps[i][j-1] + steps[i-1][j]
+    
+    return steps[-1][-1]
+```
+#### Using Permutation/factorization
+``` python
+# O(m+n) | O(1)
+
+# move right = width - 1 
+# move down = height - 1
+# for width = 4 and height = 3 the total possible moves are permutation of {R,R,R, D, D}
+# answer/permutations = { (right + down) ! } / (right !  * down !)
+def numberOfWaysToTraverseGraph(width, height):
+    right = width - 1
+    down = height - 1
+
+    numerator = factorial(right + down)
+    denominator = factorial(right) * factorial(down)
+
+    return numerator / denominator
+
+
+def factorial(num):
+    result = 1
+    for n in range(2, num + 1):
+        result *= n
+        
+    return result
+```
 ## 5. Max Sum increasing subsequence
 
 Problem: Return max sum and subsequnce
