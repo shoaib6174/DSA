@@ -199,9 +199,11 @@ def levenshteinDistance(str1, str2):
     return evenEdits[-1] if len(big) % 2 == 0 else oddEdits[-1]  #currEdits don't work with empty string
 
 ```
-## 6. Number of ways to traverse graph
+## 5. Number of ways to traverse graph
 
 * Brute Force: add 1 when reaches destination
+
+
 ```python
 def numberOfWaysToTraverseGraph(width, height):
     # brute force recursion
@@ -212,7 +214,9 @@ def numberOfWaysToTraverseGraph(width, height):
     return numberOfWaysToTraverseGraph(width-1, height) + numberOfWaysToTraverseGraph(width, height-1)
 
 ```
-* Memomization 
+
+``` python
+# Memomization 
 def numberOfWaysToTraverseGraph(width, height):
 	def traverse_graph(width, height, memo = {} ):
 		token = f"{width},{height}"
@@ -272,7 +276,7 @@ def factorial(num):
         
     return result
 ```
-## 5. Max Sum increasing subsequence
+## 6. Max Sum increasing subsequence
 
 Problem: Return max sum and subsequnce
 
@@ -315,7 +319,7 @@ def maxSumIncreasingSubsequence(array):
 
 ```
 
-## 6. Longest common subsequence
+## 7. Longest common subsequence
 Solution:
 ```
     for each pair of substrings
