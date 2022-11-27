@@ -328,6 +328,7 @@ Solution:
 2. first row and first col represents empty string
 3. for each cell if chars match: then add char to the longest subsequence excluding them ([i-1][j-1])
 4. else take the longest excluding one of them ( [i-1][j] or [i][j-1]
+
 ![image](https://user-images.githubusercontent.com/40586752/204074689-8ce6eb0d-8e13-42d0-a95b-a10633650c0c.png)
 
 ``` python
@@ -347,3 +348,42 @@ def longestCommonSubsequence(str1, str2):
     return matches[-1][-1]
 
 ```
+
+
+```python
+# space optimization
+# O(mn) | O(mn)
+# To avoid concating the string: use a list of char, length of lcs, ith index of prev, j-th index of prev]
+# After the for loop build the string using the positions
+def longestCommonSubsequence(str1, str2):
+    #[None, 0, None, None] = [char, length of lcs, ith index of prev, j-th index of prev]
+    lcs = [[[None, 0, None, None] for x in range(len(str1) + 1)] for y in range(len(str2) + 1)]
+
+    for i in range(1,len(str2) + 1):
+        for j in range(1 , len(str1) + 1):
+            if str2[i - 1 ] == str1[j - 1]:
+                lcs[i][j] = [str2[i - 1] , lcs[i-1][j-1][1] + 1 , i -1, j - 1]
+            else:
+                if lcs[i-1][j][1] > lcs[i][j-1][1]:
+                    lcs[i][j] = [None , lcs[i-1][j][1]  , i -1, j ]
+                else:
+                    lcs[i][j] = [None , lcs[i][j-1][1] , i , j - 1]
+
+    return buildSequence(lcs)
+
+    
+def buildSequence(lcs):
+    seq = []
+    i = len(lcs) - 1
+    j = len(lcs[0]) - 1
+
+    while i != 0 and j != 0:
+
+        curr = lcs[i][j]
+        if curr[0] is not None:
+            seq.append(curr[0])
+        i = curr[2]
+        j = curr[3]
+
+    return list(reversed(seq))
+ ```
